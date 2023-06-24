@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "dslclib"
+version = "0.0.0"
+description = "対話システムライブコンペティションに使用できるPythonライブラリ"
+authors = ["Yuta SASAKI <yubo1336@lr.pi.titech.ac.jp>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+mypy = "^1.4.0"
+isort = "^5.12.0"
+black = "^23.3.0"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
