@@ -5,7 +5,7 @@ from .src import (
     EmotionType,
     ExpressionController,
     ExpressionType,
-    FaceRecognitinClient,
+    FaceRecognitionClient,
     GazeDirection,
     GazeObject,
     MotionType,
@@ -14,4 +14,4 @@ from .src import (
     Text2SpeechClient,
 )
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
