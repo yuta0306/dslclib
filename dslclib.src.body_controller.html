@@ -1,0 +1,562 @@
+<!doctype html>
+<html class="no-js" lang="ja">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="検索" href="search.html" /><link rel="next" title="dslclib.src.expression_controller module" href="dslclib.src.expression_controller.html" /><link rel="prev" title="dslclib.src.base module" href="dslclib.src.base.html" />
+
+    <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
+        <title>dslclib.src.body_controller module - dslclib ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">dslclib  ドキュメント</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">dslclib  ドキュメント</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="検索" name="q" aria-label="検索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">dslclib</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of dslclib</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="dslclib.html">dslclib package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of dslclib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current has-children"><a class="reference internal" href="dslclib.src.html">dslclib.src package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of dslclib.src package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dslclib.src.base.html">dslclib.src.base module</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">dslclib.src.body_controller module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dslclib.src.expression_controller.html">dslclib.src.expression_controller module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dslclib.src.face_recognition.html">dslclib.src.face_recognition module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dslclib.src.speech_recognition.html">dslclib.src.speech_recognition module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dslclib.src.tts.html">dslclib.src.tts module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-dslclib.src.body_controller">
+<span id="dslclib-src-body-controller-module"></span><h1>dslclib.src.body_controller module<a class="headerlink" href="#module-dslclib.src.body_controller" title="この見出しへのパーマリンク">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.BodyController">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dslclib.src.body_controller.</span></span><span class="sig-name descname"><span class="pre">BodyController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">21000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.body_controller.BodyController" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="dslclib.src.base.html#dslclib.src.base.BaseClient" title="dslclib.src.base.BaseClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">dslclib.src.base.BaseClient</span></code></a></p>
+<p>Ericaの身体をコントロールするクライアント．
+ソケットにコマンドを送ることでEricaを動かす．</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ip</strong> (<em>str</em><em>, </em><em>optional</em>) -- <p>ipアドレス．</p>
+<p>デフォルトはNoneであり，Noneが与えられた時，127.0.0.1(ローカルホスト)を指定し，
+もし，docker内でこのモジュールが立ち上がっていた場合，自動でそれが認識され，host.docker.internalを指定する．</p>
+<p>host.docker.internalは，docker内からローカルホストのポートに接続するために必要である．</p>
+</p></li>
+<li><p><strong>port</strong> (<em>int = 21000</em>) -- ソケット通信を行うポート．</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">BodyController</span><span class="p">()</span>
+<span class="go">ipがNoneだったため、127.0.0.1をipアドレスとして設定します。</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span>
+<span class="go">Socket(</span>
+<span class="go">    ip   = 127.0.0.1</span>
+<span class="go">    port = 21000</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.BodyController._create_command">
+<span class="sig-name descname"><span class="pre">_create_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">controller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dslclib.src.body_controller.BodyController._create_command" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.BodyController.gaze">
+<span class="sig-name descname"><span class="pre">gaze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eye</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dslclib.src.body_controller.BodyController.gaze" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>Ericaの目線または顔の向きを指示するメソッド．
+GazeObject，GazeDirectionを用いることで，簡単に指示を行うことができる．</p>
+<p>obj, direction, eye, headのいずれかは引数として入力しなければならない．</p>
+<p>目線と顔の向きの両方を，同じ向きに動かす場合はdirectionに座標を与える．</p>
+<p>目線のみならばeye，顔の向きのみならばheadに座標を与える．</p>
+<p>また，目線と顔の向きを動かすが，別の座標をそれぞれ指示したい場合は，eyeとheadにそれぞれ座標を与える．</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>str</em><em>, </em><em>optional</em>) -- 見るオブジェクトの名前．指定したオブジェクトの方向に目線と顔を向ける．
+ここではデータクラスGazeObjectを用いることができる．
+直接文字列を与えることも可能．</p></li>
+<li><p><strong>direction</strong> (<em>tuple</em><em>, </em><em>optional</em>) -- 指定した座標に対して目線と顔を向ける．
+ここではデータクラスGazeDirectionを用いることができる．
+直接座標をタプルで与えることも可能．</p></li>
+<li><p><strong>eye</strong> (<em>tuple</em><em>, </em><em>optional</em>) -- 指定した座標に対して目線のみを向ける．
+ここではデータクラスGazeDirectionを用いることができる．
+直接座標をタプルで与えることも可能．</p></li>
+<li><p><strong>head</strong> (<em>tuple</em><em>, </em><em>optional</em>) -- 指定した座標に対して顔のみを向ける．
+ここではデータクラスGazeDirectionを用いることができる．
+直接座標をタプルで与えることも可能．</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">gaze</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">GazeObject</span><span class="o">.</span><span class="n">Sofa</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">gaze</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">GazeDirection</span><span class="o">.</span><span class="n">Right</span><span class="p">)</span>  <span class="c1"># 目線と顔の向きを右に</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">gaze</span><span class="p">(</span><span class="n">eye</span><span class="o">=</span><span class="n">GazeDirection</span><span class="o">.</span><span class="n">Right</span><span class="p">)</span>  <span class="c1"># 目線のみを右に</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">gaze</span><span class="p">(</span><span class="n">eye</span><span class="o">=</span><span class="n">GazeDirection</span><span class="o">.</span><span class="n">Right</span><span class="p">,</span> <span class="n">head</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">))</span>  <span class="c1"># 目線と顔の向きを別にできる．また，座標を直接与えられる．</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">gaze</span><span class="p">()</span>  <span class="c1"># 何も引数を与えないとエラー</span>
+<span class="go">ValueError(&quot;いずれかの引数に正しい引数を入力してください。&quot;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.BodyController.play_motion">
+<span class="sig-name descname"><span class="pre">play_motion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dslclib.src.body_controller.BodyController.play_motion" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>モーション名に対応するモーションをEricaに指示するメソッド</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motion</strong> (<em>str</em>) -- モーション名．MotionTypeのデータクラスを使うことで，簡単に指示を行うことができる．
+MotionTypeでサポートしていないモーション名もたくさんあり，これらはCGEricaの画面左上で確認することができる．
+より詳細なモーションを指示したい場合は，直接strを引数に与えること．</p>
+</dd>
+</dl>
+<p class="rubric">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">play_motion</span><span class="p">(</span><span class="n">MotionType</span><span class="o">.</span><span class="n">Greeting</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">play_motion</span><span class="p">(</span><span class="n">motion</span><span class="o">=</span><span class="n">MotionType</span><span class="o">.</span><span class="n">Greeting</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">play_motion</span><span class="p">(</span><span class="s2">&quot;greeting&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.ControllerType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dslclib.src.body_controller.</span></span><span class="sig-name descname"><span class="pre">ControllerType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Eye</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'EyeController'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Head</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'HeadController'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.body_controller.ControllerType" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Ericaのどの部分をコントロールするかを指定するデータクラス．
+ControllerType()とインスタンス化する必要はない．</p>
+<p>EyeControllerはEricaの目線のコントロールを指定し，HeadControllerはEricaの頭の向きのコントロールを指定する．
+指定する文字列が長いため，このデータクラスを使うことを推奨する．</p>
+<p class="rubric">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ControllerType</span><span class="o">.</span><span class="n">Eye</span>
+<span class="go">EyeController</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ControllerType</span><span class="o">.</span><span class="n">Head</span>
+<span class="go">HeadController</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.ControllerType.Eye">
+<span class="sig-name descname"><span class="pre">Eye</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'EyeController'</span></em><a class="headerlink" href="#dslclib.src.body_controller.ControllerType.Eye" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.ControllerType.Head">
+<span class="sig-name descname"><span class="pre">Head</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'HeadController'</span></em><a class="headerlink" href="#dslclib.src.body_controller.ControllerType.Head" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.GazeDirection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dslclib.src.body_controller.</span></span><span class="sig-name descname"><span class="pre">GazeDirection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Front</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">1.2,</span> <span class="pre">1.5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">1.2,</span> <span class="pre">1.5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(-1.0,</span> <span class="pre">1.2,</span> <span class="pre">1.5)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.body_controller.GazeDirection" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Ericaの目線の方向を事前定義したデータクラス．
+GazeDirection()とインスタンス化する必要はない．</p>
+<p>FrontとRightとLeftを用意している．
+この3方向以外の向きを指定する場合，BodyController.gazeに直接数値を入力することができる．</p>
+<p class="rubric">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">GazeDirection</span><span class="o">.</span><span class="n">Front</span>
+<span class="go">(0.0, 1.2, 1.5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GazeDirection</span><span class="o">.</span><span class="n">Right</span>
+<span class="go">(1.0, 1.2, 1.5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GazeDirection</span><span class="o">.</span><span class="n">Left</span>
+<span class="go">(-1.0, 1.2, 1.5)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.GazeDirection.Front">
+<span class="sig-name descname"><span class="pre">Front</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0.0,</span> <span class="pre">1.2,</span> <span class="pre">1.5)</span></em><a class="headerlink" href="#dslclib.src.body_controller.GazeDirection.Front" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.GazeDirection.Left">
+<span class="sig-name descname"><span class="pre">Left</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(-1.0,</span> <span class="pre">1.2,</span> <span class="pre">1.5)</span></em><a class="headerlink" href="#dslclib.src.body_controller.GazeDirection.Left" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.GazeDirection.Right">
+<span class="sig-name descname"><span class="pre">Right</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(1.0,</span> <span class="pre">1.2,</span> <span class="pre">1.5)</span></em><a class="headerlink" href="#dslclib.src.body_controller.GazeDirection.Right" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.GazeObject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dslclib.src.body_controller.</span></span><span class="sig-name descname"><span class="pre">GazeObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Monitor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'monitor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Desk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'desk'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sofa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Sofa'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.body_controller.GazeObject" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Ericaの目線の対象を事前定義したデータクラス．
+GazeObject()とインスタンス化する必要はない．</p>
+<p>Desk，Monitor，Sofaを用意している．</p>
+<p class="rubric">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">GazeObject</span><span class="o">.</span><span class="n">Monitor</span>
+<span class="go">monitor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GazeObject</span><span class="o">.</span><span class="n">Desk</span>
+<span class="go">desk</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GazeObject</span><span class="o">.</span><span class="n">Sofa</span>
+<span class="go">Sofa</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.GazeObject.Desk">
+<span class="sig-name descname"><span class="pre">Desk</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'desk'</span></em><a class="headerlink" href="#dslclib.src.body_controller.GazeObject.Desk" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.GazeObject.Monitor">
+<span class="sig-name descname"><span class="pre">Monitor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'monitor'</span></em><a class="headerlink" href="#dslclib.src.body_controller.GazeObject.Monitor" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.GazeObject.Sofa">
+<span class="sig-name descname"><span class="pre">Sofa</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Sofa'</span></em><a class="headerlink" href="#dslclib.src.body_controller.GazeObject.Sofa" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.MotionType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dslclib.src.body_controller.</span></span><span class="sig-name descname"><span class="pre">MotionType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DefaultMotion'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Greeting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'greeting'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nono</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'nono'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NodDeep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'nod_deep'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'nod'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RightHandBasePosition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'righthandbaseposition'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LeftHandBasePositin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lefthandbaseposition'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.body_controller.MotionType" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>MotinonType
+Ericaのモーションの命令を一部事前定義している．
+MotionType()とインスタンス化する必要はない．</p>
+<p>ここでは，Default, Greeting, Nono, NodDeep, Nod, RightHandBasePosition, LeftHandBasePositionを用意している．</p>
+<p>以下のプロパティ以外は、Erica&#64;CGのMotionを参照されたい．
+CGEricaの画面の左上のウィンドウに全てのモーションの命令が書かれている．</p>
+<p class="rubric">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MotionType</span><span class="o">.</span><span class="n">Default</span>
+<span class="go">DefaultMotion</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MotionType</span><span class="o">.</span><span class="n">Nod</span>
+<span class="go">nod</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MotionType</span><span class="o">.</span><span class="n">RightHandBasePosition</span>
+<span class="go">righthandbaseposition</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.MotionType.Default">
+<span class="sig-name descname"><span class="pre">Default</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DefaultMotion'</span></em><a class="headerlink" href="#dslclib.src.body_controller.MotionType.Default" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.MotionType.Greeting">
+<span class="sig-name descname"><span class="pre">Greeting</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'greeting'</span></em><a class="headerlink" href="#dslclib.src.body_controller.MotionType.Greeting" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.MotionType.LeftHandBasePositin">
+<span class="sig-name descname"><span class="pre">LeftHandBasePositin</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lefthandbaseposition'</span></em><a class="headerlink" href="#dslclib.src.body_controller.MotionType.LeftHandBasePositin" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.MotionType.Nod">
+<span class="sig-name descname"><span class="pre">Nod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'nod'</span></em><a class="headerlink" href="#dslclib.src.body_controller.MotionType.Nod" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.MotionType.NodDeep">
+<span class="sig-name descname"><span class="pre">NodDeep</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'nod_deep'</span></em><a class="headerlink" href="#dslclib.src.body_controller.MotionType.NodDeep" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.MotionType.Nono">
+<span class="sig-name descname"><span class="pre">Nono</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'nono'</span></em><a class="headerlink" href="#dslclib.src.body_controller.MotionType.Nono" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dslclib.src.body_controller.MotionType.RightHandBasePosition">
+<span class="sig-name descname"><span class="pre">RightHandBasePosition</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'righthandbaseposition'</span></em><a class="headerlink" href="#dslclib.src.body_controller.MotionType.RightHandBasePosition" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="dslclib.src.expression_controller.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">dslclib.src.expression_controller module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="dslclib.src.base.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">dslclib.src.base module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Yuta SASAKI
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">dslclib.src.body_controller module</a><ul>
+<li><a class="reference internal" href="#dslclib.src.body_controller.BodyController"><code class="docutils literal notranslate"><span class="pre">BodyController</span></code></a><ul>
+<li><a class="reference internal" href="#dslclib.src.body_controller.BodyController._create_command"><code class="docutils literal notranslate"><span class="pre">BodyController._create_command()</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.BodyController.gaze"><code class="docutils literal notranslate"><span class="pre">BodyController.gaze()</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.BodyController.play_motion"><code class="docutils literal notranslate"><span class="pre">BodyController.play_motion()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.ControllerType"><code class="docutils literal notranslate"><span class="pre">ControllerType</span></code></a><ul>
+<li><a class="reference internal" href="#dslclib.src.body_controller.ControllerType.Eye"><code class="docutils literal notranslate"><span class="pre">ControllerType.Eye</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.ControllerType.Head"><code class="docutils literal notranslate"><span class="pre">ControllerType.Head</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.GazeDirection"><code class="docutils literal notranslate"><span class="pre">GazeDirection</span></code></a><ul>
+<li><a class="reference internal" href="#dslclib.src.body_controller.GazeDirection.Front"><code class="docutils literal notranslate"><span class="pre">GazeDirection.Front</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.GazeDirection.Left"><code class="docutils literal notranslate"><span class="pre">GazeDirection.Left</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.GazeDirection.Right"><code class="docutils literal notranslate"><span class="pre">GazeDirection.Right</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.GazeObject"><code class="docutils literal notranslate"><span class="pre">GazeObject</span></code></a><ul>
+<li><a class="reference internal" href="#dslclib.src.body_controller.GazeObject.Desk"><code class="docutils literal notranslate"><span class="pre">GazeObject.Desk</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.GazeObject.Monitor"><code class="docutils literal notranslate"><span class="pre">GazeObject.Monitor</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.GazeObject.Sofa"><code class="docutils literal notranslate"><span class="pre">GazeObject.Sofa</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.MotionType"><code class="docutils literal notranslate"><span class="pre">MotionType</span></code></a><ul>
+<li><a class="reference internal" href="#dslclib.src.body_controller.MotionType.Default"><code class="docutils literal notranslate"><span class="pre">MotionType.Default</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.MotionType.Greeting"><code class="docutils literal notranslate"><span class="pre">MotionType.Greeting</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.MotionType.LeftHandBasePositin"><code class="docutils literal notranslate"><span class="pre">MotionType.LeftHandBasePositin</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.MotionType.Nod"><code class="docutils literal notranslate"><span class="pre">MotionType.Nod</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.MotionType.NodDeep"><code class="docutils literal notranslate"><span class="pre">MotionType.NodDeep</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.MotionType.Nono"><code class="docutils literal notranslate"><span class="pre">MotionType.Nono</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.body_controller.MotionType.RightHandBasePosition"><code class="docutils literal notranslate"><span class="pre">MotionType.RightHandBasePosition</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script src="_static/translations.js"></script>
+    </body>
+</html>
