@@ -31,7 +31,7 @@ jobs:
       - name: Build
         run: |
           poetry install
-          sphinx-build ./docs ./docs/_build
+          poetry run sphinx-build ./docs ./docs/_build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
