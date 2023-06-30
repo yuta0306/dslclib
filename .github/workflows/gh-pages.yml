@@ -30,7 +30,7 @@ jobs:
           poetry self add "poetry-dynamic-versioning[plugin]"
       - name: Build
         run: |
-          make html
+          sphinx-build ./docs ./docs/_build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
