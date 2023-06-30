@@ -13,3 +13,7 @@
 - [https://yuta0306.github.io/dslclib/](https://yuta0306.github.io/dslclib/)にリファレンスを公開しました．
 - `FaceRecognitinClient`→`FaceRecognitionClient`とタイポを修正しました．
 
+### 2023/06/30
+
+- `v0.1.3`をリリースしました．
+- タイポを修正しました。
