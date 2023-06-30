@@ -1,17 +1,17 @@
 from .src import (
     BaseClient,
+    BodyController,
+    ControllerType,
+    EmotionType,
+    ExpressionController,
+    ExpressionType,
+    FaceRecognitinClient,
+    GazeDirection,
+    GazeObject,
+    MotionType,
     SpeechRecognitionClient,
     STTRecognitionType,
     Text2SpeechClient,
-    ExpressionController,
-    ExpressionType,
-    MotionType,
-    GazeDirection,
-    GazeObject,
-    ControllerType,
-    BodyController,
-    EmotionType,
-    FaceRecognitinClient,
 )
 
 __version__ = "0.1.0"
