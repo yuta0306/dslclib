@@ -48,7 +48,7 @@ class FaceRecognitionClient(BaseClient):
 
         Examples
         --------
-        >>> client = BodyController()
+        >>> client = FaceRecognitionClient()
         ipがNoneだったため、127.0.0.1をipアドレスとして設定します。
         >>> client
         Socket(

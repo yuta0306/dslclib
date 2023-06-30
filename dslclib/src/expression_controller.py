@@ -86,7 +86,7 @@ class ExpressionController(BaseClient):
 
         Examples
         --------
-        >>> client = BodyController()
+        >>> client = ExpressionController()
         ipがNoneだったため、127.0.0.1をipアドレスとして設定します。
         >>> client
         Socket(

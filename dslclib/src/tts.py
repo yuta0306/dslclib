@@ -76,7 +76,7 @@ class Text2SpeechClient(BaseClient):
 
         Examples
         --------
-        >>> client = BodyController()
+        >>> client = Text2SpeechClient()
         ipがNoneだったため、127.0.0.1をipアドレスとして設定します。
         >>> client
         Socket(
