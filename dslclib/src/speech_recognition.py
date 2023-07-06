@@ -99,6 +99,15 @@ class SpeechRecognitionClient(BaseClient):
         -------
         tuple[Literal["interimresult", "result"], str]
             (状態, 認識結果)
+
+        Examples
+        --------
+        >>> client = SpeechRecognitionClient()
+        >>> output = client.listen()
+        >>> output.result
+        こんにちは
+        >>> output["result"]
+        こんにちは
         """
         while True:
             received = self.receive_line()

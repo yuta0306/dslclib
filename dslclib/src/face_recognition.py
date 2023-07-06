@@ -105,14 +105,14 @@ class FaceRecognitionClient(BaseClient):
         >>>
         """
         super().__init__(ip, port)
-        self.__age: Optional[int] = None
-        self.__gender: Optional[Literal["Man", "Woman"]] = None
-        self.__gender_score: Optional[float] = None
+        self.age: Optional[int] = None
+        self.gender: Optional[Literal["Man", "Woman"]] = None
+        self.gender_score: Optional[float] = None
 
     def get_user_info(
         self,
     ) -> tuple[Optional[int], Optional[Literal["Man", "Woman"]], Optional[float]]:
-        return self.__age, self.__gender, self.__gender_score
+        return self.age, self.gender, self.gender_score
 
     def receive_line(self) -> str:
         """
@@ -126,7 +126,7 @@ class FaceRecognitionClient(BaseClient):
         received: str
             ソケット通信によって受け取った値を文字列に変換したもの
         """
-        received = str(self.sock.recv(128).decode())
+        received = str(self.sock.recv(256).decode())
         return received
 
     @staticmethod
@@ -249,6 +249,15 @@ class FaceRecognitionClient(BaseClient):
         Returns
         -------
         OutputForFaceRecognition
+
+        Examples
+        --------
+        >>> client = FaceRecognitionClient()
+        >>> output = client.listen(FaceRecognitionClient.summarize_times)
+        >>> output.emotion
+        angry
+        >>> output["emotion"]
+        angry
         """
         do_return: bool = False
         pool: list[tuple[float, str, float]] = []
@@ -268,9 +277,9 @@ class FaceRecognitionClient(BaseClient):
             )
             # user info
             if "age" in list(data.keys()):
-                self.__age = data["age"]
-                self.__gender = data["gender_class"]
-                self.__gender_score = data["gender_score"]
+                self.age = data["age"]
+                self.gender = data["gender_class"]
+                self.gender_score = data["gender_score"]
 
             age, gender, gender_score = self.get_user_info()
             if func is None:
@@ -307,9 +316,12 @@ class FaceRecognitionClient(BaseClient):
 if __name__ == "__main__":
     client = FaceRecognitionClient()
     for i in range(10):
-        print(client.listen(FaceRecognitionClient.summarize_times))
+        output = client.listen(FaceRecognitionClient.summarize_times)
+        print(output)
+        print(output.emotion)
+        print(output["emotion"])
 
-    for _ in range(10):
+    for _ in range(3):
         print(client.listen(FaceRecognitionClient.summarize_timestamps))
 
     client.close()
