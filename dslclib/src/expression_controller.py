@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Literal, Optional
 
 from dslclib.src.base import BaseClient
 
@@ -12,20 +12,20 @@ class ExpressionType:
     ExpressionType()とインスタンス化する必要はない．
     """
 
-    MouthA: str = "mouth-a"
-    MouthI: str = "mouth-i"
-    MouthU: str = "mouth-u"
-    MouthE: str = "mouth-e"
-    MouthO: str = "mouth-o"
-    Normal: str = "normal"
-    FullSmile: str = "fullsmile"
-    Smile: str = "smile"
-    Bad: str = "bad"
-    Angry: str = "angry"
-    EyeClose: str = "eye-close"
-    EyeOpen: str = "eye-open"
-    EyeUp: str = "eye-up"
-    EyeDown: str = "eye-down"
+    MouthA: Literal["mouth-a"] = "mouth-a"
+    MouthI: Literal["mouth-i"] = "mouth-i"
+    MouthU: Literal["mouth-u"] = "mouth-u"
+    MouthE: Literal["mouth-e"] = "mouth-e"
+    MouthO: Literal["mouth-o"] = "mouth-o"
+    Normal: Literal["normal"] = "normal"
+    FullSmile: Literal["fullsmile"] = "fullsmile"
+    Smile: Literal["smile"] = "smile"
+    Bad: Literal["bad"] = "bad"
+    Angry: Literal["angry"] = "angry"
+    EyeClose: Literal["eye-close"] = "eye-close"
+    EyeOpen: Literal["eye-open"] = "eye-open"
+    EyeUp: Literal["eye-up"] = "eye-up"
+    EyeDown: Literal["eye-down"] = "eye-down"
 
 
 """

@@ -8,18 +8,46 @@ from dslclib.src.base import BaseClient
 
 
 @dataclass
+class Rotation:
+    """Rotation
+    ユーザの顔の向きを示すデータクラス"""
+
+    pitch: float
+    roll: float
+    yaw: float
+
+
+@dataclass
+class OutputForFaceRecognition:
+    """OutputForFaceRecognition
+    感情認識サーバのクライアントが出力するデータクラス"""
+
+    summarized: bool
+    timestamp: float
+    emotion: str
+    emotion_score: float
+    rotations: list[Rotation]
+    age: Optional[int] = None
+    gender: Optional[Literal["Man", "Woman"]] = None
+    gender_score: Optional[float] = None
+
+    def __getitem__(self, key):
+        return getattr(self, key)
+
+
+@dataclass
 class EmotionType:
     """EmotionType
     感情認識サーバが出力する感情値を定義したデータクラス
     """
 
-    Neutral: str = "neutral"
-    Happiness: str = "happiness"
-    Surprise: str = "surprise"
-    Sadness: str = "sadness"
-    Anger: str = "anger"
-    Disgust: str = "disgust"
-    fear: str = "fear"
+    Neutral: Literal["neutral"] = "neutral"
+    Happiness: Literal["happiness"] = "happiness"
+    Surprise: Literal["surprise"] = "surprise"
+    Sadness: Literal["sadness"] = "sadness"
+    Anger: Literal["anger"] = "anger"
+    Disgust: Literal["disgust"] = "disgust"
+    Fear: Literal["fear"] = "fear"
 
 
 class FaceRecognitionClient(BaseClient):
@@ -58,6 +86,14 @@ class FaceRecognitionClient(BaseClient):
         >>>
         """
         super().__init__(ip, port)
+        self.__age: Optional[int] = None
+        self.__gender: Optional[Literal["Man", "Woman"]] = None
+        self.__gender_score: Optional[float] = None
+
+    def get_user_info(
+        self,
+    ) -> tuple[Optional[int], Optional[Literal["Man", "Woman"]], Optional[float]]:
+        return self.__age, self.__gender, self.__gender_score
 
     def receive_line(self) -> str:
         """
@@ -168,9 +204,7 @@ class FaceRecognitionClient(BaseClient):
 
         return True, timestamp, emotion, score
 
-    def listen(
-        self, func: Optional[Callable] = None
-    ) -> tuple[Optional[float], str, Optional[float]]:
+    def listen(self, func: Optional[Callable] = None) -> OutputForFaceRecognition:
         """
         感情認識サーバとのソケット通信をするメソッド
 
@@ -195,27 +229,60 @@ class FaceRecognitionClient(BaseClient):
 
         Returns
         -------
-        tuple[Optional[float], str, Optional[float]]
+        OutputForFaceRecognition
         """
         do_return: bool = False
         pool: list[tuple[float, str, float]] = []
+        rotations: list[Rotation] = []
         while True:
             received = self.receive_line()
             if not re.search(r"^\{[^\n]+\}\n", received):
                 continue
 
             data = json.loads(received)
-            if func is None:
-                return data["timestamp"], data["emotion_class"], data["emotion_score"]
+            timestamp: float = data["timestamp"]
+            emotion: str = data["emotion_class"]
+            score: float = data["emotion_score"]
+            rot = data["rotation"]
+            rotations.append(
+                Rotation(pitch=rot["pitch"], roll=rot["roll"], yaw=rot["yaw"])
+            )
+            # user info
+            if "age" in list(data.keys()):
+                self.__age = data["age"]
+                self.__gender = data["gender_class"]
+                self.__gender_score = data["gender_score"]
 
-            pool.append(tuple(data.values()))
+            age, gender, gender_score = self.get_user_info()
+            if func is None:
+                return OutputForFaceRecognition(
+                    summarized=True,
+                    timestamp=timestamp,
+                    emotion=emotion,
+                    emotion_score=score,
+                    rotations=rotations,
+                    age=age,
+                    gender=gender,
+                    gender_score=gender_score,
+                )
+
+            pool.append((timestamp, emotion, score))
             do_return, timestamp, emotion, score = func(data=pool)
             if do_return:
                 if not isinstance(emotion, str):
                     raise TypeError(
                         f"出力する感情クラスは`str`のみですが、{type(str)}があたえられています。`func`を要件を満たすように設計してください。"
                     )
-                return timestamp, emotion, score
+                return OutputForFaceRecognition(
+                    summarized=True,
+                    timestamp=timestamp,
+                    emotion=emotion,
+                    emotion_score=score,
+                    rotations=rotations,
+                    age=age,
+                    gender=gender,
+                    gender_score=gender_score,
+                )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from typing import Optional
+from typing import Literal, Optional
 
 from dslclib.src.base import BaseClient
 
@@ -26,13 +26,13 @@ class MotionType:
     righthandbaseposition
     """
 
-    Default: str = "DefaultMotion"
-    Greeting: str = "greeting"
-    Nono: str = "nono"
-    NodDeep: str = "nod_deep"
-    Nod: str = "nod"
-    RightHandBasePosition: str = "righthandbaseposition"
-    LeftHandBasePositin: str = "lefthandbaseposition"
+    Default: Literal["DefaultMotion"] = "DefaultMotion"
+    Greeting: Literal["greeting"] = "greeting"
+    Nono: Literal["nono"] = "nono"
+    NodDeep: Literal["nod_deep"] = "nod_deep"
+    Nod: Literal["nod"] = "nod"
+    RightHandBasePosition: Literal["righthandbaseposition"] = "righthandbaseposition"
+    LeftHandBasePositin: Literal["lefthandbaseposition"] = "lefthandbaseposition"
 
 
 """
@@ -96,9 +96,9 @@ class GazeObject:
     Sofa
     """
 
-    Monitor: str = "monitor"
-    Desk: str = "desk"
-    Sofa: str = "Sofa"
+    Monitor: Literal["monitor"] = "monitor"
+    Desk: Literal["desk"] = "desk"
+    Sofa: Literal["Sofa"] = "Sofa"
 
 
 """
@@ -129,8 +129,8 @@ class ControllerType:
     HeadController
     """
 
-    Eye: str = "EyeController"
-    Head: str = "HeadController"
+    Eye: Literal["EyeController"] = "EyeController"
+    Head: Literal["HeadController"] = "HeadController"
 
 
 """

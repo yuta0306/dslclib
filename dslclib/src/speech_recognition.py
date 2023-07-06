@@ -1,14 +1,23 @@
 import re
 from dataclasses import dataclass
-from typing import Optional
+from typing import Literal, Optional
 
 from dslclib.src.base import BaseClient
 
 
 @dataclass
 class STTRecognitionType:
-    InterimResult = "interimresult"
-    Result = "result"
+    InterimResult: Literal["interimresult"] = "interimresult"
+    Result: Literal["result"] = "result"
+
+
+@dataclass
+class OutputForSTTRecognition:
+    type: Literal["interimresult", "result"]
+    result: str
+
+    def __getitem__(self, key):
+        return getattr(self, key)
 
 
 class SpeechRecognitionClient(BaseClient):
@@ -67,7 +76,7 @@ class SpeechRecognitionClient(BaseClient):
         received = str(self.sock.recv(4096).decode())
         return received
 
-    def listen(self, interim: bool = True) -> tuple[str, str]:
+    def listen(self, interim: bool = True) -> OutputForSTTRecognition:
         """
         データがたまってからデータを出力するメソッド．
 
@@ -96,11 +105,17 @@ class SpeechRecognitionClient(BaseClient):
             if interim:  # 発話中でも出力するかどうか
                 matching_result = re.search(r"^interimresult:([^\n]+)\n", received)
                 if matching_result is not None:
-                    return STTRecognitionType.InterimResult, matching_result.group(1)
+                    return OutputForSTTRecognition(
+                        type=STTRecognitionType.InterimResult,
+                        result=matching_result.group(1),
+                    )
 
             matching_result = re.search(r"^result:([^\n]+)\n", received)
             if matching_result is not None:
-                return STTRecognitionType.Result, matching_result.group(1)
+                return OutputForSTTRecognition(
+                    type=STTRecognitionType.Result,
+                    result=matching_result.group(1),
+                )
 
 
 if __name__ == "__main__":
