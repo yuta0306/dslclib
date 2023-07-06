@@ -10,7 +10,14 @@ from dslclib.src.base import BaseClient
 @dataclass
 class Rotation:
     """Rotation
-    ユーザの顔の向きを示すデータクラス"""
+    ユーザの顔の向きを示すデータクラス
+
+    各アトリビュートは以下の通りです．
+
+    - pitch: 上下(上がプラス)
+    - roll: 回転．首をかしげる動き(右にかしげるとプラス)
+    - yaw: 横向き(左がプラス)
+    """
 
     pitch: float
     roll: float
@@ -20,7 +27,19 @@ class Rotation:
 @dataclass
 class OutputForFaceRecognition:
     """OutputForFaceRecognition
-    感情認識サーバのクライアントが出力するデータクラス"""
+    感情認識サーバのクライアントが出力するデータクラス
+
+    各アトリビュートは以下の通りです．
+
+    - summarized: 出力結果が，funcによって，一定時刻分の認識結果を要約されたものであるかどうか
+    - timestamp: タイムスタンプ
+    - emotion: 認識された感情クラス
+    - emotion_score: 感情クラスのスコア
+    - rotations: 各時刻のRotationの情報が時系列順に含まれるリスト
+    - age: 推測された年齢
+    - gender: 推測された性別
+    - gender_score: 推測性別のスコア
+    """
 
     summarized: bool
     timestamp: float
