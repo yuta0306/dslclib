@@ -17,3 +17,12 @@
 
 - `v0.1.3`をリリースしました．
 - タイポを修正しました。
+
+### 2023/07/06
+
+- `v0.2.0`をリリースしました。
+- EmotionType.fearをEmotionType.Fearに修正しました。
+- FaceRecognitionServerの更新に伴い、face_recognition.pyにおけるモジュールをアップデートしました。
+- OutputFor...とクライアントの出力をデータクラスで定義しました。
+    - `OutputForFaceRecognition.emotion`と`OutputForFaceRecognition["emotion"]`の二つのアクセス方法を可能にしました。
+- 型ヒントの一部をstrからLiteralに変更しました。
