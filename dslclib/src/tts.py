@@ -48,7 +48,7 @@ class SpeechConfig(str):
             "speechmark": speechmark,
             "text": text,
         }
-        return super().__new__(cls, json.dumps(data))
+        return super().__new__(cls, json.dumps(data, ensure_ascii=False))
 
 
 class Text2SpeechClient(BaseClient):
