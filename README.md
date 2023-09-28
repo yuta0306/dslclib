@@ -26,3 +26,8 @@
 - OutputFor...とクライアントの出力をデータクラスで定義しました。
     - `OutputForFaceRecognition.emotion`と`OutputForFaceRecognition["emotion"]`の二つのアクセス方法を可能にしました。
 - 型ヒントの一部をstrからLiteralに変更しました。
+
+### 2023/09/28
+
+- `v0.2.1`をリリースしました
+- 稀に音声合成ができなくなるバグが発生したため，軽微な修正を加えました
