@@ -1,5 +1,6 @@
 import json
 from typing import Optional
+import time
 
 from dslclib.src.base import BaseClient
 
@@ -49,57 +50,6 @@ class SpeechConfig(str):
             "text": text,
         }
         return super().__new__(cls, json.dumps(data, ensure_ascii=False))
-    
-
-class TTSDataClient(BaseClient):
-    """TTSDataClient
-    
-    音声合成サーバの状態をソケットから受け取るクライアント
-    """
-
-    def __init__(self, ip: Optional[str] = None, port: int = 2345) -> None:
-        """
-        Parameters
-        ----------
-        ip: str, optional
-            ipアドレス．
-
-            デフォルトはNoneであり，Noneが与えられた時，127.0.0.1(ローカルホスト)を指定し，
-            もし，docker内でこのモジュールが立ち上がっていた場合，自動でそれが認識され，host.docker.internalを指定する．
-
-            host.docker.internalは，docker内からローカルホストのポートに接続するために必要である．
-        port: int = 2345
-            ソケット通信を行うポート．
-
-        Returns
-        -------
-
-        Examples
-        --------
-        >>> client = TTSDataClient()
-        ipがNoneだったため、127.0.0.1をipアドレスとして設定します。
-        >>> client
-        Socket(
-            ip   = 127.0.0.1
-            port = 2345
-        )
-        >>>
-        """
-        super().__init__(ip, port)
-
-    def is_speaking(self) -> bool:
-        received = json.loads(str(self.sock.recv(4096).decode()))
-        if "isSpeaking" in list(received.keys()):
-            return received["isSpeaking"]
-        return False
-    
-    def wait_finish_speaking(self, timeout: float = -1) -> None:
-        if timeout > 0:
-            raise NotImplementedError
-        while True:
-            received = json.loads(str(self.sock.recv(4096).decode()))
-            if "result" in list(received.keys()) and received["result"] == "success-end":
-                break
 
 
 class Text2SpeechClient(BaseClient):
@@ -108,7 +58,11 @@ class Text2SpeechClient(BaseClient):
     音声にしたい発話テキストをソケットに送信するクライアント
     """
 
-    def __init__(self, ip: Optional[str] = None, port: int = 3456) -> None:
+    def __init__(
+            self,
+            ip: Optional[str] = None,
+            port: int = 3456,
+        ) -> None:
         """
         Parameters
         ----------
@@ -137,6 +91,24 @@ class Text2SpeechClient(BaseClient):
         >>>
         """
         super().__init__(ip, port)
+
+    def is_speaking(self) -> bool:
+        self.sock.send(json.dumps({"engine": "ISSPEAKING"}).encode())
+        received = json.loads(str(self.sock.recv(1024).decode()))
+        if "isSpeaking" in list(received.keys()):
+            return received["isSpeaking"] == True
+        return False
+    
+    def stop_speaking(self) -> None:
+        self.sock.send(json.dumps({"engine": "STOP"}).encode())
+    
+    def wait_finish_speaking(self, timeout: float = -1.0) -> None:
+        if timeout > 0:
+            raise NotImplementedError
+        while True:
+            received = json.loads(str(self.sock.recv(4096).decode()))
+            if "result" in list(received.keys()) and received["result"] == "success-end":
+                break
 
     def speech(
         self,
