@@ -208,6 +208,40 @@
           <section id="module-dslclib.src.tts">
 <span id="dslclib-src-tts-module"></span><h1>dslclib.src.tts module<a class="headerlink" href="#module-dslclib.src.tts" title="この見出しへのパーマリンク">#</a></h1>
 <dl class="py class">
+<dt class="sig sig-object py" id="dslclib.src.tts.QueueSupervisor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dslclib.src.tts.</span></span><span class="sig-name descname"><span class="pre">QueueSupervisor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.tts.QueueSupervisor" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></p>
+<p>This constructor should always be called with keyword arguments. Arguments are:</p>
+<p><em>group</em> should be None; reserved for future extension when a ThreadGroup
+class is implemented.</p>
+<p><em>target</em> is the callable object to be invoked by the run()
+method. Defaults to None, meaning nothing is called.</p>
+<p><em>name</em> is the thread name. By default, a unique name is constructed of
+the form &quot;Thread-N&quot; where N is a small decimal number.</p>
+<p><em>args</em> is the argument tuple for the target invocation. Defaults to ().</p>
+<p><em>kwargs</em> is a dictionary of keyword arguments for the target
+invocation. Defaults to {}.</p>
+<p>If a subclass overrides the constructor, it must make sure to invoke
+the base class constructor (Thread.__init__()) before doing anything
+else to the thread.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.tts.QueueSupervisor.kill">
+<span class="sig-name descname"><span class="pre">kill</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.tts.QueueSupervisor.kill" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.tts.QueueSupervisor.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.tts.QueueSupervisor.run" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>Method representing the thread's activity.</p>
+<p>You may override this method in a subclass. The standard run() method
+invokes the callable object passed to the object's constructor as the
+target argument, if any, with sequential and keyword arguments taken
+from the args and kwargs arguments, respectively.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="dslclib.src.tts.SpeechConfig">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dslclib.src.tts.</span></span><span class="sig-name descname"><span class="pre">SpeechConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'POLLY'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speaker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Mizuki'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocal_tract_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_information</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speechmark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.tts.SpeechConfig" title="この定義へのパーマリンク">#</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
@@ -259,8 +293,33 @@
 </pre></div>
 </div>
 <dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.tts.Text2SpeechClient.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dslclib.src.tts.Text2SpeechClient.close" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>ipアドレスのportへの接続を切る．</p>
+<p class="rubric">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">BaseClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.tts.Text2SpeechClient.is_speaking">
+<span class="sig-name descname"><span class="pre">is_speaking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dslclib.src.tts.Text2SpeechClient.is_speaking" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>音声を再生中かどうかを確認するメソッド</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.tts.Text2SpeechClient.monitor_queue">
+<span class="sig-name descname"><span class="pre">monitor_queue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dslclib.src.tts.Text2SpeechClient.monitor_queue" title="この定義へのパーマリンク">#</a></dt>
+<dd><p>キューを監視し、合成音声の再生を終えたのちにキューからコマンドを削除するメソッド
+<strong>注意</strong>: このメソッドは`self.supervisor`から呼び出されることを推奨する</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="dslclib.src.tts.Text2SpeechClient.speech">
-<span class="sig-name descname"><span class="pre">speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'POLLY'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speaker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Mizuki'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocal_tract_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_information</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speechmark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dslclib.src.tts.Text2SpeechClient.speech" title="この定義へのパーマリンク">#</a></dt>
+<span class="sig-name descname"><span class="pre">speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'POLLY'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speaker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Mizuki'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocal_tract_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_information</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speechmark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_num_queue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_queue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dslclib.src.tts.Text2SpeechClient.speech" title="この定義へのパーマリンク">#</a></dt>
 <dd><p>音声にしたい発話テキストと発話音声の設定を入力としてソケットに送信する関数</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
@@ -274,10 +333,23 @@
 <li><p><strong>vocal_tract_length</strong> (<em>int</em><em>, </em><em>default = 0</em>) -- </p></li>
 <li><p><strong>duration_information</strong> (<em>bool</em><em>, </em><em>default = False</em>) -- </p></li>
 <li><p><strong>speechmark</strong> (<em>bool</em><em>, </em><em>default = False</em>) -- スピーチマークが含まれるかどうか</p></li>
+<li><p><strong>max_num_queue</strong> (<em>int</em><em>, </em><em>default = 1</em>) -- TTSコマンドのキューを最大いくつまでプールできるか</p></li>
+<li><p><strong>wait_queue</strong> (<em>bool</em><em>, </em><em>default = False</em>) -- max_num_queueのキュー数を超えた場合、キューが空くまで処理を待つかどうか。
+<a href="#id1"><span class="problematic" id="id2">`</span></a>wait=False`に設定した場合、TTSのコマンドをキューにスタックせずに終了する。</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.tts.Text2SpeechClient.stop_speaking">
+<span class="sig-name descname"><span class="pre">stop_speaking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dslclib.src.tts.Text2SpeechClient.stop_speaking" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dslclib.src.tts.Text2SpeechClient.wait_finish_speaking">
+<span class="sig-name descname"><span class="pre">wait_finish_speaking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dslclib.src.tts.Text2SpeechClient.wait_finish_speaking" title="この定義へのパーマリンク">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -331,9 +403,19 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">dslclib.src.tts module</a><ul>
+<li><a class="reference internal" href="#dslclib.src.tts.QueueSupervisor"><code class="docutils literal notranslate"><span class="pre">QueueSupervisor</span></code></a><ul>
+<li><a class="reference internal" href="#dslclib.src.tts.QueueSupervisor.kill"><code class="docutils literal notranslate"><span class="pre">QueueSupervisor.kill()</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.tts.QueueSupervisor.run"><code class="docutils literal notranslate"><span class="pre">QueueSupervisor.run()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#dslclib.src.tts.SpeechConfig"><code class="docutils literal notranslate"><span class="pre">SpeechConfig</span></code></a></li>
 <li><a class="reference internal" href="#dslclib.src.tts.Text2SpeechClient"><code class="docutils literal notranslate"><span class="pre">Text2SpeechClient</span></code></a><ul>
+<li><a class="reference internal" href="#dslclib.src.tts.Text2SpeechClient.close"><code class="docutils literal notranslate"><span class="pre">Text2SpeechClient.close()</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.tts.Text2SpeechClient.is_speaking"><code class="docutils literal notranslate"><span class="pre">Text2SpeechClient.is_speaking()</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.tts.Text2SpeechClient.monitor_queue"><code class="docutils literal notranslate"><span class="pre">Text2SpeechClient.monitor_queue()</span></code></a></li>
 <li><a class="reference internal" href="#dslclib.src.tts.Text2SpeechClient.speech"><code class="docutils literal notranslate"><span class="pre">Text2SpeechClient.speech()</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.tts.Text2SpeechClient.stop_speaking"><code class="docutils literal notranslate"><span class="pre">Text2SpeechClient.stop_speaking()</span></code></a></li>
+<li><a class="reference internal" href="#dslclib.src.tts.Text2SpeechClient.wait_finish_speaking"><code class="docutils literal notranslate"><span class="pre">Text2SpeechClient.wait_finish_speaking()</span></code></a></li>
 </ul>
 </li>
 </ul>
